@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ProiectDRXTransports.Models.TransportationModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 style="text-align:center;">Transportation Management Page</h1>
+
+
+<div class="page">
+<table class="table">
+    <thead>
+        <tr>
+                        <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusTransport)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArrivalDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DriverModel.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationModel.Adress)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="7">
+                @using (Html.BeginForm("Create","Transportations", FormMethod.Get))
+{
+    <input type="submit" value="Create New Transportation" class="btn-c" />
+}
+            </td>
+        </tr>   
+@foreach (var item in Model) {
+        <tr>
+                        <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusTransport)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArrivalDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DriverModel.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationModel.Adress)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

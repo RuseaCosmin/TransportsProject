@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ProiectDRXTransports.Models.GateModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 style="text-align:center;">Gate Management Page</h1>
+
+
+
+<div class="page">
+<table class="table">
+    <thead>
+        <tr>
+                        <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationModel)
+            </th>
+                        <th>
+                @Html.DisplayNameFor(model => model.LocationModelId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+                <tr>
+            <td colspan="4">
+                @using (Html.BeginForm("Create","Gates", FormMethod.Get))
+{
+    <input type="submit" value="Create New Gate" class="btn-c" />
+}
+            </td>
+        </tr>   
+@foreach (var item in Model) {
+        <tr>
+                        <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationModel.Adress)
+            </td>
+                        <td>
+                @Html.DisplayFor(modelItem => item.LocationModelId)
+            </td>
+            <td>
+                
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

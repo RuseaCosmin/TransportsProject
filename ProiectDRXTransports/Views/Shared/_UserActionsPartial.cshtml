@@ -1,0 +1,37 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<TransportationUser> SignInManager
+@inject UserManager<TransportationUser> UserManager
+<div style="border: 0px ridge #000;border-radius: 20px;width:400px;position:relative;margin: 0 auto;">
+    
+        
+        
+        @if (SignInManager.IsSignedIn(User))
+        {
+            string role = UserManager.GetUserAsync(User).Result.Role;
+            @if( role=="Admin"){
+        <input class="btn-a" type="button" value="Manage Drivers" onclick="location.href='@Url.Action("Index", "Drivers")'" />
+        <br/><br/>
+        <input class="btn-a" type="button" value="Manage Locations" onclick="location.href='@Url.Action("Index", "Locations")'" />
+                <br/><br/>
+        <input class="btn-a" type="button" value="Manage Transportations" onclick="location.href='@Url.Action("Index", "Transportations")'" />
+                <br/><br/>
+        <input class="btn-a" type="button" value="Manage Gates" onclick="location.href='@Url.Action("Index", "Gates")'" />
+                    }
+            else if (role == "User")
+        {
+                 <input class="btn-b" type="button" value="Manage Schedule And Send To PDF" onclick="location.href='@Url.Action("Index", "TransportationSchedules")'" />   
+
+        }
+    }
+    else
+        {
+            <br />
+            <br />
+
+            <p style="background-color:red;color:white;border-radius: 6px;font-size:larger;">Log In To View Management Options</p>
+        }
+    
+</div>

@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<TransportationUser> SignInManager
+@inject UserManager<TransportationUser> UserManager
+@{
+    var loc=-1;
+    ViewData["Title"] = "Home Page";
+    if(User.Identity.IsAuthenticated)
+       loc = UserManager.GetUserAsync(User).Result.LocationId;
+}
+
+<div class="text-center">
+
+<br /><br />
+@if(User.Identity.IsAuthenticated){
+    @if(UserManager.GetUserAsync(User).Result.Role=="User"){
+    <h1 class="display-4">Welcome Overseer Of Location @loc </h1>
+    <br/>
+    }
+        @if(UserManager.GetUserAsync(User).Result.Role=="Admin"){
+    <h1 class="display-4">Welcome Admin </h1>
+    <br>
+        }
+        }
+        else{
+            <h1 class="display-4">Welcome</h1>
+
+        }
+
+    <partial name="_UserActionsPartial" />
+</div>

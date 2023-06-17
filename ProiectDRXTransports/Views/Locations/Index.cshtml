@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ProiectDRXTransports.Models.LocationModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 style="text-align:center">Location Management Page</h1>
+
+
+<div class="page">
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Adress)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+                <tr>
+            <td colspan="3">
+                @using (Html.BeginForm("Create","Locations", FormMethod.Get))
+{
+    <input type="submit" value="Create New Location" class="btn-c" />
+}
+            </td>
+        </tr>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adress)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

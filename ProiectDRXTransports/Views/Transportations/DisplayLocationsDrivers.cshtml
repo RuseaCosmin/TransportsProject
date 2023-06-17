@@ -1,0 +1,71 @@
+﻿@model TransportationDriverLocationModel
+
+@{
+    ViewData["Title"] = "Locations And Drivers";
+}
+
+
+<a asp-action="Create">Back To Create</a>
+
+    <div class="page">
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.driverModels.ToList().First().Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.driverModels.ToList().First().LastName)
+            </th>
+                        <th>
+                @Html.DisplayNameFor(model => model.driverModels.ToList().First().FirstName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+<tbody>
+    @foreach (var item in Model.driverModels) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+                        <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+        </tr>
+}
+    </tbody>
+    </table>
+    </div>
+    <div class="page">
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.locationModels.ToList().First().Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.locationModels.ToList().First().Adress)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+<tbody>
+    @foreach (var item in Model.locationModels) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adress)
+            </td>
+
+        </tr>
+}
+    </tbody>
+    </table>
+    </div>

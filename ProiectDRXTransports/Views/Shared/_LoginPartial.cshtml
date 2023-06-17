@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<TransportationUser> SignInManager
+@inject UserManager<TransportationUser> UserManager
+
+<ul class="navbar-nav">
+@if (SignInManager.IsSignedIn(User))
+{
+        if (UserManager.GetUserAsync(User).Result.Role == "Admin")
+        {
+            <li class="nav-item">
+                <a  class="nav-link tra text-light" asp-area="Identity" asp-page="/Account/Register">
+                    Create New Account
+                </a>
+            </li>
+            <li>
+            <div style="width:50px;"></div>
+            </li>
+            <li class="nav-item">
+                <a  class="nav-link text-light" >@User.Identity?.Name</a>
+            </li>
+            <li class="nav-item">
+                <form  class="form-inline tra" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button  type="submit" class="nav-link btn btn-link text-light">Logout</button>
+                </form>
+            </li>
+        }
+                if (UserManager.GetUserAsync(User).Result.Role == "User"){
+            <li class="nav-item">
+                <a  class="nav-link text-light" >@User.Identity?.Name</a>
+            </li>
+            <li class="nav-item">
+                <form  class="form-inline tra" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button  type="submit" class="nav-link btn btn-link text-light">Logout</button>
+                </form>
+            </li>
+                }
+    }
+else
+{
+
+    <li class="nav-item">
+        <a class="nav-link tra text-light" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </li>
+}
+</ul>

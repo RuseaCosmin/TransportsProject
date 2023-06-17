@@ -1,0 +1,83 @@
+﻿@model IEnumerable<ProiectDRXTransports.Models.TransportationScheduleModel>
+
+@{
+    ViewData["Title"] = "Filtered";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //ViewData.Model = (FilterModel)ViewBag.Filter;    
+}
+
+@if (@Model.FirstOrDefault() != null)
+{
+    <h1 style="text-align:center">Schedule For Location @Model.FirstOrDefault().TransportationModel.LocationModelId At Gate @Model.FirstOrDefault().GateModelId </h1>
+}
+else
+{
+        <h1 style="text-align:center">Schedule Is Empty </h1>
+
+}
+<div class="text-center">
+@using (Html.BeginForm("ToPDFFiltered","TransportationSchedules", FormMethod.Post))
+{
+    <input type="submit" value="To PDF" class="btn-a" />
+}
+<br />
+<div>
+    @using (Html.BeginForm("Create","TransportationSchedules", FormMethod.Get)){
+    <button class="btn-b" asp-controller="TransportationSchedules" asp-action="Index">Back to List</button>
+    }
+</div>  
+</div>
+<br />
+<div class="page">
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliveryTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GateModel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransportationModel.LocationModel.Adress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransportationModel.DriverModel.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransportationModel.DriverModel.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransportationModel.DriverModel.PhoneNr)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliveryTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GateModel.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransportationModel.LocationModel.Adress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransportationModel.DriverModel.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransportationModel.DriverModel.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransportationModel.DriverModel.PhoneNr)
+            </td>
+
+        </tr>
+}
+    </tbody>
+</table>
+
+</div>
